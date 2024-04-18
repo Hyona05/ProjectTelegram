@@ -57,4 +57,9 @@ public class Message extends BaseModel {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "Message [" + message + "] to " + toID;
+    }
 }
