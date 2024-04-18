@@ -5,7 +5,7 @@ import uz.pdp.frontend.views.LoginView;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Welcome to our TELEGRAM app!!!");
+        System.out.println("Welcome to our TELEGRAM app!!!");
         while (true) {
             int menu = MenuUtils.menu(MenuUtils.LOGIN);
             switch (menu){
