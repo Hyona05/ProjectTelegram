@@ -5,8 +5,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.printf("Welcome to our TELEGRAM app!!!");
         while (true) {
-            String login = MenuUtils.LOGIN;
-            switch (ScanUtil.scanInt("Choose action: ")) {
+            int menu = MenuUtils.menu(MenuUtils.LOGIN);
+            switch (menu){
                 case 1 -> signIn();
                 case 2 -> SignUp();
                 case 3 -> {
