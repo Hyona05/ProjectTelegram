@@ -13,7 +13,7 @@ public class MessageServiceImplementation implements MessageService{
     }
     @Override
     public void create(Message entity) {
-
+       messages.add(entity);
     }
 
     @Override
