@@ -18,22 +18,36 @@ public class MessageServiceImplementation implements MessageService{
 
     @Override
     public Message get(String id) {
-        return null;
+        for (Message message : messages) {
+            if(message.getId().equals(id)){
+                return message;
+            }
+        }return null;
     }
 
     @Override
     public List<Message> getList() {
-        return null;
+        return messages;
     }
 
     @Override
     public void update(Message newEntity) {
-
+        for (int i = 0; i < messages.size(); i++) {
+            if(messages.get(i).getId().equals(newEntity.getId())){
+                messages.set(i, newEntity);
+            }
+        }
     }
 
     @Override
     public void delete(String id) {
-
+        for (int i = 0; i < messages.size(); i++) {
+            Message message = messages.get(i);
+            if(message.getId().equals(id)){
+                messages.remove(i);
+                return;
+            }
+        }
     }
 
    private static MessageServiceImplementation messageServiceImpl;
