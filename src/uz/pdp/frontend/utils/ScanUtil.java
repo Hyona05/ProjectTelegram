@@ -8,17 +8,17 @@ public interface ScanUtil {
     Scanner intScanner = new Scanner(System.in);
 
     static int scanInt(String hint){
-        System.out.println(hint);
+        System.out.print(hint);
         return intScanner.nextInt();
     }
 
     static String scanString(String hint){
-        System.out.println(hint);
+        System.out.print(hint);
         return strScanner.nextLine();
     }
 
     static BigDecimal scanBigDec(String hint){
-        System.out.println(hint);
+        System.out.print(hint);
         String sum = strScanner.nextLine();
         return new BigDecimal(sum);
     }

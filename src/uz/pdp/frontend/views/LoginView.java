@@ -2,6 +2,7 @@ package uz.pdp.frontend.views;
 
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.entity.user.User;
+import uz.pdp.backend.enums.UserStatus;
 import uz.pdp.backend.service.userservice.UserService;
 import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.ScanUtil;
@@ -17,8 +18,18 @@ public class LoginView {
         return userService.login(loginDTO);
     }
     public static void signUp(){
-//        userService.create(new User(ScanUtil.scanString("Enter fullName: "),
-//                ScanUtil.scanString("Enter username: "),
-//                ScanUtil.scanString("Enter password: ")));
+        userService.create(new User(ScanUtil.scanString("Enter firstName: "),
+                ScanUtil.scanString("Enter lastName: "),
+                ScanUtil.scanString("Enter userName: "),
+                ScanUtil.scanString("Enter password: "),
+                ScanUtil.scanInt("Enter age: "),
+                ScanUtil.scanString("Enter phoneNumber: "),
+                chooseStatus()));
+    }
+
+    private static UserStatus chooseStatus() {
+        System.out.println(UserStatus.getList());
+        int i = ScanUtil.scanInt("Enter status: ");
+        return UserStatus.getCategoryByOrdinal(i);
     }
 }

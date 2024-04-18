@@ -4,43 +4,68 @@ import uz.pdp.backend.entity.message.Message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MessageServiceImplementation implements MessageService{
+    private List<Message> messages;
+    private static MessageServiceImplementation messageServiceImpl;
 
-    List<Message> messages;
-    private MessageServiceImplementation() {
-        this.messages = new ArrayList<>();
-    }
-    @Override
-    public void create(Message entity) {
-
-    }
-
-    @Override
-    public Message get(String id) {
-        return null;
-    }
-
-    @Override
-    public List<Message> getList() {
-        return null;
-    }
-
-    @Override
-    public void update(Message newEntity) {
-
-    }
-
-    @Override
-    public void delete(String id) {
-
-    }
-
-   private static MessageServiceImplementation messageServiceImpl;
     public static MessageServiceImplementation getInstance() {
         if (messageServiceImpl == null) {
             messageServiceImpl = new MessageServiceImplementation();
         }
         return messageServiceImpl;
+    }
+    private MessageServiceImplementation() {
+        this.messages = new ArrayList<>();
+    }
+
+    @Override
+    public boolean create(Message entity) {
+        if (entity == null) {
+            return false;
+        }
+        for (Message existingUser : messages) {
+            if (existingUser.getId().equals(entity.getId())) {
+                return false;
+            }
+        }
+        messages.add(entity);
+        return true;
+    }
+
+    @Override
+    public Message get(String id) {
+        for (Message message : messages) {
+            if (message.getId().equals(id)){
+                return message;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Message> getList() {
+        return messages;
+    }
+
+    @Override
+    public void update(Message newEntity) {
+        for (int i = 0; i < messages.size(); i++) {
+            if(messages.get(i).getId().equals(newEntity.getId())){
+                messages.set(i, newEntity);
+            }
+        }
+    }
+
+    @Override
+    public boolean delete(String id) {
+        for (int i = 0; i < messages.size(); i++) {
+            if (messages.get(i).getId().equals(id)){
+                messages.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 }
