@@ -56,7 +56,7 @@ public class UserServiceImplementation implements UserService{
               list.remove(user);
           }
       }
-        System.out.println("User deleted: " + id);
+        System.out.println("User deleted");
     }
 
     @Override
