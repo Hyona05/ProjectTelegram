@@ -19,12 +19,11 @@ public class MessageServiceImplementation implements MessageService{
 
     @Override
     public Message get(String id) {
-        for (Message m : messages) {
-            if (m.getId().equals(id)) {
-                return m;
+        for (Message message : messages) {
+            if(message.getId().equals(id)){
+                return message;
             }
-        }
-        return null;
+        }return null;
     }
 
     @Override
@@ -35,20 +34,18 @@ public class MessageServiceImplementation implements MessageService{
     @Override
     public void update(Message newEntity) {
         for (int i = 0; i < messages.size(); i++) {
-            if (messages.get(i).getId().equals(newEntity.getId())) {
+            if(messages.get(i).getId().equals(newEntity.getId())){
                 messages.set(i, newEntity);
-                System.out.println("Message updated");
-                return;
             }
         }
     }
 
     @Override
     public void delete(String id) {
-        for (Message m : messages) {
-            if (m.getId().equals(id)) {
-                messages.remove(m);
-                System.out.println("Message deleted");
+        for (int i = 0; i < messages.size(); i++) {
+            Message message = messages.get(i);
+            if(message.getId().equals(id)){
+                messages.remove(i);
                 return;
             }
         }
