@@ -34,12 +34,13 @@ public class MessageServiceImplementation implements MessageService{
     }
 
     @Override
-    public void update(Message newEntity) {
+    public boolean update(Message newEntity) {
         for (int i = 0; i < messages.size(); i++) {
             if(messages.get(i).getId().equals(newEntity.getId())){
                 messages.set(i, newEntity);
+                return true;
             }
-        }
+        }return false;
     }
 
     @Override

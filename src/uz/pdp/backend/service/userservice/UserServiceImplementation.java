@@ -47,16 +47,15 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public void update(User newEntity) {
+    public boolean update(User newEntity) {
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
             if (user.getId().equals(newEntity.getId())) {
                 users.set(i, newEntity);
-                System.out.println("User updated");
-                return;
+                return true;
             }
         }
-        System.out.println("User not found");
+       return false;
     }
 
 
@@ -65,9 +64,10 @@ public class UserServiceImplementation implements UserService{
       for (User user: users) {
           if (user.getId().equals(id)) {
               users.remove(user);
+              return true;
           }
       }
-        System.out.println("User deleted");
+        return  false;
     }
 
     @Override

@@ -51,12 +51,13 @@ public class ChatServiceImplementation implements ChatService{
     }
 
     @Override
-    public void update(Chat newEntity) {
+    public boolean update(Chat newEntity) {
         for (int i = 0; i < chats.size(); i++) {
             if(chats.get(i).getId().equals(newEntity.getId())){
                 chats.set(i, newEntity);
+                return true;
             }
-        }
+        }return false;
     }
 
     @Override
