@@ -1,6 +1,5 @@
 package uz.pdp.frontend.views;
 
-import uz.pdp.backend.entity.chat.Chat;
 import uz.pdp.backend.entity.group.Group;
 import uz.pdp.backend.entity.message.Message;
 import uz.pdp.backend.entity.user.User;
@@ -41,11 +40,11 @@ public class UserView {
     }
 
     private static void showMyGroup() {
-        for (Group group : groupService.getList()) {
-            if(group.getAdminID().equals(currentUser.getId())){
-                System.out.println(group.getGroupName());
-            }
-        }
+        /*for (int i = 0; i < groupService.getList().size(); i++) {
+            if (groupService.getList().get(i).getAdminID().equals(currentUser.getId()) ||
+
+            ) {}
+        }*/
     }
 
     private static void showMyChats() {
