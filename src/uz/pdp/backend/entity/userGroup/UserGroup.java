@@ -27,4 +27,12 @@ public class UserGroup extends BaseModel {
     public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
+
+    @Override
+    public String toString() {
+        return "UserGroup{" +
+                "userId='" + userId + '\'' +
+                ", groupId='" + groupId + '\'' +
+                '}';
+    }
 }

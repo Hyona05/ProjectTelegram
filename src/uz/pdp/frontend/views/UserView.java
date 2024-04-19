@@ -7,6 +7,7 @@ import uz.pdp.backend.service.messageservice.MessageServiceImplementation;
 import uz.pdp.backend.service.userGroupService.UserGroupServiceImp;
 import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.MenuUtils;
+import uz.pdp.frontend.utils.ScanUtil;
 
 import java.util.List;
 
@@ -16,21 +17,24 @@ public class UserView {
     static GroupServiceImplementation groupService = GroupServiceImplementation.getInstance();
     static MessageServiceImplementation messageService = MessageServiceImplementation.getInstance();
     static UserGroupServiceImp userGroupService = UserGroupServiceImp.getInstance();
+
     public static void profile(User user) {
         currentUser = user;
-        while (true){
-            switch (MenuUtils.menu(MenuUtils.USER)){
-                case 1->showMyChats();
-                case 2->showMyGroup();
-                case 3->showMyContact();
-                case 4->showMyProfile();
-                case 0->{
+        while (true) {
+            switch (MenuUtils.menu(MenuUtils.USER)) {
+                case 1 -> GroupView.profile(user);
+                case 2 -> MessageView.profile(user);
+                case 0 -> {
                     currentUser = null;
                     System.out.println("Logging out");
                     return;
                 }
             }
         }
+    }
+
+    private static void creatGroups() {
+        groupService.create(new Group(ScanUtil.scanString("Enter group name: "), currentUser.getId(), 3));
     }
 
     private static void showMyProfile() {
@@ -40,15 +44,15 @@ public class UserView {
         return userService.getList();
     }
 
-    private static void showMyGroup() {
+    static void showMyGroup() {
         for (int i = 0; i < groupService.getList().size(); i++) {
-            for (int j = 0; j < userGroupService.getList().size(); j++) {
-                if (groupService.getList().get(i).getAdminID().equals(currentUser.getId()) ||
-                        userGroupService.getList().get(j).getUserId().equals(currentUser.getId())
-                ) {
-                    System.out.println(groupService.getList().get(i));
-                    System.out.println(userGroupService.getList().get(j));
-                }
+            if (groupService.getList().get(i).getAdminID().equals(currentUser.getId())) {
+                System.out.println(groupService.getList().get(i));
+            }
+        }
+        for (int i = 0; i < userService.getList().size(); i++) {
+            if (userGroupService.getList().get(i).getUserId().equals(currentUser.getId())) {
+                System.out.println(userGroupService.getList().get(i));
             }
         }
     }
@@ -60,5 +64,5 @@ public class UserView {
             }
         }
     }
-
 }
+

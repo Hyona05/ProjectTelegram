@@ -9,6 +9,8 @@ import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.MenuUtils;
 import uz.pdp.frontend.utils.ScanUtil;
 
+import static uz.pdp.frontend.views.UserView.showMyGroup;
+
 public class GroupView {
     private static User currentUser;
     static UserServiceImplementation userService = UserServiceImplementation.getInstance();
@@ -20,10 +22,12 @@ public class GroupView {
         while (true){
             switch (MenuUtils.menu(MenuUtils.GROUP)){
                 case 1->createGroup();
-                case 2->addUser();
-                case 3->sendMessage();
-                case 4->setting();
-                case 5->deleteGroup();
+                case 2->showMyGroup();
+                case 3->joinGroup();
+                case 4->addUser();
+                case 5->sendMessage();
+                case 6->setting();
+                case 7->deleteGroup();
                 case 0->{
                     currentUser = null;
                     System.out.println("Logging out");
@@ -31,6 +35,14 @@ public class GroupView {
                 }
             }
         }
+    }
+
+    private static void joinGroup() {
+
+    }
+
+    private static void showMyGroup(){
+
     }
 
     private static void deleteGroup() {

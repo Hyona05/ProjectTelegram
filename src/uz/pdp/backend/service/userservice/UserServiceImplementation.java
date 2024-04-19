@@ -15,6 +15,7 @@ public class UserServiceImplementation implements UserService{
 
     private UserServiceImplementation() {
         this.users = new ArrayList<>();
+        this.users.add(new User("Admin","Admin","admin","123",15));
     }
 
     @Override
