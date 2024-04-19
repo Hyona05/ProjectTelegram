@@ -38,4 +38,11 @@ public class Group extends BaseModel {
     public void setGroupMembersAmount(int groupMembersAmount) {
         this.groupMembersAmount = groupMembersAmount;
     }
+
+    @Override
+    public String toString() {
+        return "groupName " + groupName +
+                ", adminID " + adminID +
+                ", groupMembersAmount " + groupMembersAmount;
+    }
 }

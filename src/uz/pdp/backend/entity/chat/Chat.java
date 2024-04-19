@@ -27,4 +27,10 @@ public class Chat  extends BaseModel {
     public void setUser2(String user2) {
         this.user2 = user2;
     }
+
+    @Override
+    public String toString() {
+        return "user1='" + user1 +
+                ", user2='" + user2;
+    }
 }

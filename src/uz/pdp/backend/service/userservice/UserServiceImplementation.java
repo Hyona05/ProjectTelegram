@@ -2,6 +2,7 @@ package uz.pdp.backend.service.userservice;
 
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.entity.user.User;
+import uz.pdp.backend.enums.UserStatus;
 
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class UserServiceImplementation implements UserService{
 
     private UserServiceImplementation() {
         this.users = new ArrayList<>();
+        this.users.add(new User("Sanobar","Arslonboyeva","Sanobar","0909",19,"123 45 67", UserStatus.ACTIVE));
     }
 
     @Override
@@ -39,12 +41,17 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public User get(String id) {
+        for (User user : users) {
+            if (user.getId().equals(id)){
+                return user;
+            }
+        }
         return null;
     }
 
     @Override
     public List<User> getList() {
-        return null;
+        return users;
     }
 
     @Override

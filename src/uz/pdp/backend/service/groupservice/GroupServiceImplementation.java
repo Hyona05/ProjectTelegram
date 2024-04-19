@@ -17,6 +17,7 @@ public class GroupServiceImplementation implements GroupService{
     }
     private GroupServiceImplementation() {
         this.groups = new ArrayList<>();
+        this.groups.add(new Group("G40","",3));
     }
 
     @Override
