@@ -9,7 +9,6 @@ import java.util.Objects;
 public class MessageServiceImplementation implements MessageService{
     private List<Message> messages;
 
-
     private MessageServiceImplementation() {
         this.messages = new ArrayList<>();
     }
@@ -17,7 +16,7 @@ public class MessageServiceImplementation implements MessageService{
     @Override
     public boolean create(Message entity) {
       messages.add(entity);
-        System.out.println("Message created");
+      return true;
     }
 
     @Override
