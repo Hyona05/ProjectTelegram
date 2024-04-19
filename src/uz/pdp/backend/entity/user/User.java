@@ -13,8 +13,14 @@ public class User extends BaseModel {
     private String phoneNumber;
     private UserStatus status;
 
-    public User(String firstName, String lastName, String userName, String password, Integer age,
-                String phoneNumber, UserStatus status) {
+    public User(String firstName, String lastName, String userName, String password, Integer age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.age = age;
+    }
+    public User(String firstName, String lastName, String userName, String password, Integer age, String phoneNumber, UserStatus status) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;

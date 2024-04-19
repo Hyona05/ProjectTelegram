@@ -82,8 +82,23 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public void signUp(SignUpDTO signUpDTO) {
+        boolean userExists = false;
+        for (User user : users) {
+            if(user.getUserName().equals(signUpDTO.userName())) {
+                userExists = true;
+                break;
+            }
+        }
 
+        if(!userExists) {
+            User newUser = new User(signUpDTO.firstName(), signUpDTO.LastName(), signUpDTO.userName(), signUpDTO.password(), signUpDTO.age());
+            users.add(newUser);
+        } else {
+
+            throw new IllegalArgumentException("Username already exists");
+        }
     }
+
 
     private static UserServiceImplementation userServiceImpl;
 

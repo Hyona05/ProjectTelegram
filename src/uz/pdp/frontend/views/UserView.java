@@ -4,6 +4,7 @@ import uz.pdp.backend.entity.message.Message;
 import uz.pdp.backend.entity.user.User;
 import uz.pdp.backend.service.groupservice.GroupServiceImplementation;
 import uz.pdp.backend.service.messageservice.MessageServiceImplementation;
+import uz.pdp.backend.service.userGroupService.UserGroupServiceImp;
 import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.MenuUtils;
 
@@ -14,6 +15,7 @@ public class UserView {
     static UserServiceImplementation userService = UserServiceImplementation.getInstance();
     static GroupServiceImplementation groupService = GroupServiceImplementation.getInstance();
     static MessageServiceImplementation messageService = MessageServiceImplementation.getInstance();
+    static UserGroupServiceImp userGroupService = UserGroupServiceImp.getInstance();
     public static void profile(User user) {
         currentUser = user;
         while (true){
@@ -39,11 +41,16 @@ public class UserView {
     }
 
     private static void showMyGroup() {
-        /*for (int i = 0; i < groupService.getList().size(); i++) {
-            if (groupService.getList().get(i).getAdminID().equals(currentUser.getId()) ||
-
-            ) {}
-        }*/
+        for (int i = 0; i < groupService.getList().size(); i++) {
+            for (int j = 0; j < userGroupService.getList().size(); j++) {
+                if (groupService.getList().get(i).getAdminID().equals(currentUser.getId()) ||
+                        userGroupService.getList().get(j).getUserId().equals(currentUser.getId())
+                ) {
+                    System.out.println(groupService.getList().get(i));
+                    System.out.println(userGroupService.getList().get(j));
+                }
+            }
+        }
     }
 
     private static void showMyChats() {
