@@ -69,5 +69,13 @@ public class GroupServiceImplementation implements GroupService{
         }
         return false;
     }
+    public Group getGroupById(String groupId) {
+        for (Group group : groups) {
+            if (group.getId().equals(groupId)) {
+                return group; // Return the group if found
+            }
+        }
+        return null; // Return null if group not found
+    }
 
 }
