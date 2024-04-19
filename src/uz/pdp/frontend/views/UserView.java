@@ -1,6 +1,4 @@
 package uz.pdp.frontend.views;
-
-import uz.pdp.backend.entity.chat.Chat;
 import uz.pdp.backend.entity.group.Group;
 import uz.pdp.backend.entity.message.Message;
 import uz.pdp.backend.entity.user.User;

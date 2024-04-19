@@ -3,7 +3,6 @@ package uz.pdp.frontend.views;
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.dto.SignUpDTO;
 import uz.pdp.backend.entity.user.User;
-import uz.pdp.backend.enums.UserStatus;
 import uz.pdp.backend.service.userservice.UserService;
 import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.ScanUtil;

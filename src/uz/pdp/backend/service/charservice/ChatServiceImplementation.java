@@ -4,7 +4,6 @@ import uz.pdp.backend.entity.chat.Chat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ChatServiceImplementation implements ChatService{
     private List<Chat> chats;
