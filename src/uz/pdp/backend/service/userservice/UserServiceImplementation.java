@@ -42,7 +42,7 @@ public class UserServiceImplementation implements UserService{
     @Override
     public User get(String id) {
         for (User user : users) {
-            if (user.getId().equals(id)){
+            if (user.getId().equals(id)) {
                 return user;
             }
         }
@@ -56,22 +56,26 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public void update(User newEntity) {
-            for (int i = 0; i < users.size(); i++) {
-                if(users.get(i).getId().equals(newEntity.getId())){
-                    users.set(i, newEntity);
-                }
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getId().equals(newEntity.getId())) {
+                users.set(i, newEntity);
+                System.out.println("User updated");
+                return;
             }
         }
+        System.out.println("User not found");
+    }
+
 
     @Override
-    public boolean delete(String id) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId().equals(id)){
-                users.remove(i);
-                return true;
-            }
-        }
-        return false;
+    public void delete(String id) {
+      for (User user: users) {
+          if (user.getId().equals(id)) {
+              users.remove(user);
+          }
+      }
+        System.out.println("User deleted");
     }
 
     @Override

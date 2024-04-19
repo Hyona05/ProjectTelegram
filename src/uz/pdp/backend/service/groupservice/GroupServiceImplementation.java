@@ -37,7 +37,7 @@ public class GroupServiceImplementation implements GroupService{
     @Override
     public Group get(String id) {
         for (Group group : groups) {
-            if (group.getId().equals(id)){
+            if (group.getId().equals(id)) {
                 return group;
             }
         }
@@ -51,7 +51,13 @@ public class GroupServiceImplementation implements GroupService{
 
     @Override
     public void update(Group newEntity) {
-
+        for (int i = 0; i < groups.size(); i++) {
+            if (groups.get(i).getId().equals(newEntity.getId())) {
+                groups.set(i, newEntity);
+                System.out.println("Group updated");
+                return;
+            }
+        }
     }
 
     @Override

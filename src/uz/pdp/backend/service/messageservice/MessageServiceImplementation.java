@@ -8,40 +8,25 @@ import java.util.Objects;
 
 public class MessageServiceImplementation implements MessageService{
     private List<Message> messages;
-    private static MessageServiceImplementation messageServiceImpl;
 
-    public static MessageServiceImplementation getInstance() {
-        if (messageServiceImpl == null) {
-            messageServiceImpl = new MessageServiceImplementation();
-        }
-        return messageServiceImpl;
-    }
+
     private MessageServiceImplementation() {
         this.messages = new ArrayList<>();
     }
 
     @Override
     public boolean create(Message entity) {
-        if (entity == null) {
-            return false;
-        }
-        for (Message existingUser : messages) {
-            if (existingUser.getId().equals(entity.getId())) {
-                return false;
-            }
-        }
-        messages.add(entity);
-        return true;
+      messages.add(entity);
+        System.out.println("Message created");
     }
 
     @Override
     public Message get(String id) {
         for (Message message : messages) {
-            if (message.getId().equals(id)){
+            if(message.getId().equals(id)){
                 return message;
             }
-        }
-        return null;
+        }return null;
     }
 
     @Override
@@ -61,11 +46,19 @@ public class MessageServiceImplementation implements MessageService{
     @Override
     public boolean delete(String id) {
         for (int i = 0; i < messages.size(); i++) {
-            if (messages.get(i).getId().equals(id)){
+            Message message = messages.get(i);
+            if(message.getId().equals(id)){
                 messages.remove(i);
                 return true;
             }
         }
-        return false;
+    }
+
+   private static MessageServiceImplementation messageServiceImpl;
+    public static MessageServiceImplementation getInstance() {
+        if (messageServiceImpl == null) {
+            messageServiceImpl = new MessageServiceImplementation();
+        }
+        return messageServiceImpl;
     }
 }

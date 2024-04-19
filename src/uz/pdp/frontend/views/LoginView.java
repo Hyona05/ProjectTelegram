@@ -1,6 +1,7 @@
 package uz.pdp.frontend.views;
 
 import uz.pdp.backend.dto.LoginDTO;
+import uz.pdp.backend.dto.SignUpDTO;
 import uz.pdp.backend.entity.user.User;
 import uz.pdp.backend.enums.UserStatus;
 import uz.pdp.backend.service.userservice.UserService;
@@ -18,18 +19,14 @@ public class LoginView {
         return userService.login(loginDTO);
     }
     public static void signUp(){
-        userService.create(new User(ScanUtil.scanString("Enter firstName: "),
-                ScanUtil.scanString("Enter lastName: "),
-                ScanUtil.scanString("Enter userName: "),
-                ScanUtil.scanString("Enter password: "),
-                ScanUtil.scanInt("Enter age: "),
-                ScanUtil.scanString("Enter phoneNumber: "),
-                chooseStatus()));
-    }
-
-    private static UserStatus chooseStatus() {
-        System.out.println(UserStatus.getList());
-        int i = ScanUtil.scanInt("Enter status: ");
-        return UserStatus.getCategoryByOrdinal(i);
+        System.out.println("Enter your info");
+        String name = ScanUtil.scanString("Enter your firstname: ");
+        String surname = ScanUtil.scanString("Enter your lastname: ");
+        String username = ScanUtil.scanString("Enter your username: ");
+        String password =  ScanUtil.scanString("Enter the password: ");
+        Integer age =  ScanUtil.scanInt("Enter your age: ");
+        SignUpDTO signUpDTO = new SignUpDTO(name, surname, username, password, age);
+        userService.signUp(signUpDTO);
+        System.out.println("Sign up successful");
     }
 }
