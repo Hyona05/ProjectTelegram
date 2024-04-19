@@ -51,6 +51,7 @@ public class MessageServiceImplementation implements MessageService{
                 return true;
             }
         }
+        return false;
     }
 
    private static MessageServiceImplementation messageServiceImpl;
