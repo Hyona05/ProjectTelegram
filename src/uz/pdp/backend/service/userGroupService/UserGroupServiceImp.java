@@ -2,31 +2,63 @@ package uz.pdp.backend.service.userGroupService;
 
 import uz.pdp.backend.entity.userGroup.UserGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserGroupServiceImp implements UserGroupService{
+    private List<UserGroup> userGroups;
+    private static UserGroupServiceImp userGroupService;
+
+    private UserGroupServiceImp(){
+        this.userGroups = new ArrayList<>();
+    }
+
+    public static UserGroupServiceImp getInstance() {
+        if (userGroupService == null){
+            userGroupService = new UserGroupServiceImp();
+        }
+        return userGroupService;
+    }
     @Override
     public boolean create(UserGroup entity) {
-        return false;
+        this.userGroups.add(entity);
+        return true;
     }
 
     @Override
     public UserGroup get(String id) {
+        for (UserGroup userGroup : userGroups) {
+            if (userGroup.getId().equals(id)){
+                return userGroup;
+            }
+        }
         return null;
     }
 
     @Override
     public List<UserGroup> getList() {
-        return List.of();
+        return userGroups;
     }
 
     @Override
     public boolean update(UserGroup newEntity) {
-return true;
+        for (int i = 0; i < userGroups.size(); i++) {
+            if (userGroups.get(i).getId().equals(newEntity.getId())){
+                userGroups.set(i,newEntity);
+                return true;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
+        for (int i = 0; i < userGroups.size(); i++) {
+            if (userGroups.get(i).getId().equals(id)){
+                userGroups.remove(i);
+                return true;
+            }
+        }
         return false;
     }
 }
