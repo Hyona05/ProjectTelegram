@@ -1,8 +1,10 @@
 package uz.pdp.frontend.views;
 
 import uz.pdp.backend.entity.group.Group;
+import uz.pdp.backend.entity.message.Message;
 import uz.pdp.backend.entity.user.User;
 import uz.pdp.backend.entity.userGroup.UserGroup;
+import uz.pdp.backend.enums.MessageTye;
 import uz.pdp.backend.service.groupservice.GroupServiceImplementation;
 import uz.pdp.backend.service.messageservice.MessageServiceImplementation;
 import uz.pdp.backend.service.userGroupService.UserGroupServiceImp;
@@ -31,8 +33,6 @@ public class
                 case 3->joinGroup();
                 case 4->addUser();
                 case 5->sendMessage();
-                case 6->setting();
-                case 7->deleteGroup();
                 case 0->{
                     currentUser = null;
                     System.out.println("Logging out");
@@ -45,47 +45,43 @@ public class
     private static void joinGroup() {
         showAllGroups();
         int i = ScanUtil.scanInt("Choose group: ") - 1;
-        userGroupService.create(new UserGroup(currentUser.getId(),groupService.getList().get(i).getId()));
-
-    }
-    private static void showAllGroups() {
-        List<Group> groups = new ArrayList<>();
-
-
-        for (Group group : groupService.getList()) {
-            if (!group.getAdminID().equals(currentUser.getId())) {
-                groups.add(group);
-            }
+        boolean isMember = userGroupService.isUserMember(currentUser.getId(), groupService.getList().get(i).getId());
+        if (isMember) {
+            System.out.println("You are already a member of this group.");
+            return;
         }
+        userGroupService.create(new UserGroup(currentUser.getId(),groupService.getList().get(i).getId()));
+        System.out.println("Joined");
+    }
 
-        for (UserGroup userGroup : userGroupService.getList()) {
-            if (!userGroup.getUserId().equals(currentUser.getId())) {
-                Group group = groupService.getGroupById(userGroup.getGroupId());
-                if (group != null) {
-                    groups.add(group);
-                }
-            }
+    private static void showAllGroups() {
+        List<Group> list = groupService.getList();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i + 1 + "." + list.get(i).getGroupName());
         }
     }
 
 
     private static void showMyGroup(){
-
-    }
-
-    private static void deleteGroup() {
-    }
-
-    private static void setting() {
+        for (Group group : groupService.getList()) {
+            for (UserGroup userGroup : userGroupService.getList()) {
+                if (group.getId().equals(userGroup.getGroupId())) {
+                    System.out.println(group.getGroupName());
+                }
+            }
+        }
     }
 
     private static void sendMessage() {
+        String message = ScanUtil.scanString("Enter message ");
     }
 
     private static void addUser() {
+
     }
 
     private static void createGroup() {
-        groupService.create(new Group(ScanUtil.scanString("Enter group name: "), currentUser.getId(),3));
+        groupService.create(new Group(ScanUtil.scanString("Enter group name: "), currentUser.getId(),
+                ScanUtil.scanInt("Enter group amount: ")));
     }
 }

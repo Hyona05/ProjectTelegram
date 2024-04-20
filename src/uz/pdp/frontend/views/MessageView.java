@@ -10,6 +10,10 @@ public class MessageView {
         currentUser = user;
         while (true) {
             switch (MenuUtils.menu(MenuUtils.MESSAGE)) {
+                case 1 -> sentMessage();
+                case 2 -> showMessages();
+                case 3 -> deleteChat();
+                case 4 -> settings();
                 case 0 -> {
                     currentUser = null;
                     System.out.println("Logging out");
@@ -17,5 +21,21 @@ public class MessageView {
                 }
             }
         }
+    }
+
+    private static void settings() {
+
+    }
+
+    private static void deleteChat() {
+
+    }
+
+    private static void showMessages() {
+
+    }
+
+    private static void sentMessage() {
+
     }
 }

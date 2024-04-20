@@ -61,4 +61,25 @@ public class UserGroupServiceImp implements UserGroupService{
         }
         return false;
     }
+    @Override
+    public boolean isUserMember(String userId, String groupId) {
+        List<UserGroup> userGroups = getUserGroupsByUserId(userId);
+        for (UserGroup userGroup : userGroups) {
+            if (userGroup.getGroupId().equals(groupId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<UserGroup> getUserGroupsByUserId(String userId) {
+        List<UserGroup> list = new ArrayList<>();
+        for (UserGroup userGroup : userGroups) {
+            if (userGroup.getUserId().equals(userId)){
+                list.add(userGroup);
+            }
+        }
+        return list;
+    }
 }
