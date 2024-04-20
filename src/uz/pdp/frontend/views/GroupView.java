@@ -1,10 +1,8 @@
 package uz.pdp.frontend.views;
 
 import uz.pdp.backend.entity.group.Group;
-import uz.pdp.backend.entity.message.Message;
 import uz.pdp.backend.entity.user.User;
 import uz.pdp.backend.entity.userGroup.UserGroup;
-import uz.pdp.backend.enums.MessageTye;
 import uz.pdp.backend.service.groupservice.GroupServiceImplementation;
 import uz.pdp.backend.service.messageservice.MessageServiceImplementation;
 import uz.pdp.backend.service.userGroupService.UserGroupServiceImp;
@@ -12,10 +10,7 @@ import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.MenuUtils;
 import uz.pdp.frontend.utils.ScanUtil;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static uz.pdp.frontend.views.UserView.showMyGroup;
 
 public class
  GroupView {
