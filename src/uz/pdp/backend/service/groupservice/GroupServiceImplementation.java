@@ -72,10 +72,10 @@ public class GroupServiceImplementation implements GroupService{
     public Group getGroupById(String groupId) {
         for (Group group : groups) {
             if (group.getId().equals(groupId)) {
-                return group; // Return the group if found
+                return group;
             }
         }
-        return null; // Return null if group not found
+        return null;
     }
 
 }
