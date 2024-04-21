@@ -72,12 +72,16 @@ public class
     }
 
     private static void sendMessage() {
+        List<UserGroup> groups = userGroupService.getList();
+        if (groups.isEmpty()) {
+            System.out.println("You don't have any groups to send a message to.");
+            return;
+        }
         showMyGroup();
         int i = ScanUtil.scanInt("Choose a group: ") - 1;
         String s = ScanUtil.scanString("Enter the message: ");
         messageService.create(new Message(currentUser.getId(), groupService.getList().get(i).getId(), MessageTye.GROUP,s));
         System.out.println("Message added");
-
     }
 
     private static void addUser() {
