@@ -9,12 +9,11 @@ import uz.pdp.backend.service.userservice.UserService;
 import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.MenuUtils;
 import uz.pdp.frontend.utils.ScanUtil;
+import static uz.pdp.frontend.Main.*;
 
-import javax.swing.text.Utilities;
 import java.util.List;
 
 public class MessageView {
-    private static User currentUser;
     private static UserService userService = UserServiceImplementation.getInstance();
     private static MessageService messageService = MessageServiceImplementation.getInstance();
     public static void profile(User user) {

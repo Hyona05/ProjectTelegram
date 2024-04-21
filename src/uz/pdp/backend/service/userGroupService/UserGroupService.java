@@ -8,4 +8,5 @@ import java.util.List;
 public interface UserGroupService extends BaseService<UserGroup> {
     boolean isUserMember(String userId, String groupId);
     List<UserGroup> getUserGroupsByUserId(String userId);
+
 }
