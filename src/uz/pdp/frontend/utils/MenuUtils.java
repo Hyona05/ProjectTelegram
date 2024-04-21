@@ -8,6 +8,6 @@ public interface MenuUtils {
 
     static int menu(String menu){
         System.out.println(menu);
-        return ScanUtil.scanInt("Choose: ");
+        return ScanUtil.scanInt("Choose menu: ");
     }
 }

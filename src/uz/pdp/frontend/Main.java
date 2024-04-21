@@ -1,9 +1,12 @@
+package uz.pdp.frontend;
+
 import uz.pdp.backend.entity.user.User;
 import uz.pdp.frontend.utils.MenuUtils;
 import uz.pdp.frontend.views.LoginView;
 import uz.pdp.frontend.views.UserView;
 
 public class Main {
+    public static  User currentUser ;
     public static void main(String[] args) {
         System.out.println("*** WELCOME TO TELEGRAM ***");
 

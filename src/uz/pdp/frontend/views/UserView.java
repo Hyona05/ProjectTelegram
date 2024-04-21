@@ -1,9 +1,10 @@
 package uz.pdp.frontend.views;
 import uz.pdp.backend.entity.user.User;
 import uz.pdp.frontend.utils.MenuUtils;
+import static uz.pdp.frontend.Main.*;
+
 
 public class UserView {
-    private static User currentUser;
 //    static UserServiceImplementation userService = UserServiceImplementation.getInstance();
 //    static GroupServiceImplementation groupService = GroupServiceImplementation.getInstance();
 //    static MessageServiceImplementation messageService = MessageServiceImplementation.getInstance();
