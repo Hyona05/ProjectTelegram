@@ -3,11 +3,13 @@ package uz.pdp.backend.service.userservice;
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.dto.SignUpDTO;
 import uz.pdp.backend.entity.user.User;
+import uz.pdp.backend.entity.userGroup.UserGroup;
 import uz.pdp.backend.enums.UserStatus;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class UserServiceImplementation implements UserService{
@@ -99,6 +101,19 @@ public class UserServiceImplementation implements UserService{
             throw new IllegalArgumentException("Username already exists");
         }
     }
+
+    @Override
+    public List<User> getUserByName(String name) {
+        name = name.toLowerCase();
+        List<User> users1 = new ArrayList<>();
+        for (User user : users) {
+            if (user.getUserName().toLowerCase().contains(name)){
+                users1.add(user);
+            }
+        }
+        return users1;
+    }
+
     public User getUserById(String userId){
         for (User user : users) {
             if(user.getId().equals(userId)){

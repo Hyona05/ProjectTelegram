@@ -66,13 +66,12 @@ public class
             return;
         }
         int index = 1;
-        for (Group group : groupService.getList()) {
-            for (UserGroup userGroup : userGroupService.getList()) {
-                if (group.getId().equals(userGroup.getGroupId())) {
-                    System.out.println(index++ + "." + group.getGroupName());
-                }
-            }
+        List<UserGroup> userGroupsByUserId = userGroupService.getUserGroupsByUserId(currentUser.getId());
+        for (UserGroup userGroup : userGroupsByUserId) {
+            System.out.println((index) + groupService.get(userGroup.getGroupId()).getGroupName());
         }
+
+
     }
 
     private static void sendMessage() {
@@ -90,6 +89,7 @@ public class
     private static void addUser() {
 
     }
+
 
     private static void createGroup() {
         groupService.create(new Group(ScanUtil.scanString("Enter group name: "), currentUser.getId(),
