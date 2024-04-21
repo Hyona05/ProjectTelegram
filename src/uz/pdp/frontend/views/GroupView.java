@@ -61,19 +61,22 @@ public class
 
 
     private static void showMyGroup(){
+        if (groupException()) {
+            System.out.println("You don't have any groups.");
+            return;
+        }
         int index = 1;
         for (Group group : groupService.getList()) {
             for (UserGroup userGroup : userGroupService.getList()) {
                 if (group.getId().equals(userGroup.getGroupId())) {
-                    System.out.println(index + "." + group.getGroupName());
+                    System.out.println(index++ + "." + group.getGroupName());
                 }
             }
         }
     }
 
     private static void sendMessage() {
-        List<UserGroup> groups = userGroupService.getList();
-        if (groups.isEmpty()) {
+        if (groupException()) {
             System.out.println("You don't have any groups to send a message to.");
             return;
         }
@@ -91,5 +94,12 @@ public class
     private static void createGroup() {
         groupService.create(new Group(ScanUtil.scanString("Enter group name: "), currentUser.getId(),
                 ScanUtil.scanInt("Enter group amount: ")));
+    }
+    private static boolean groupException(){
+        List<UserGroup> groups = userGroupService.getList();
+        if (groups.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }
