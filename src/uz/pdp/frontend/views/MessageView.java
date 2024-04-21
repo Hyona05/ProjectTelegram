@@ -12,7 +12,9 @@ import uz.pdp.frontend.utils.ScanUtil;
 import static uz.pdp.frontend.Main.*;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MessageView {
     private static UserService userService = UserServiceImplementation.getInstance();
@@ -35,9 +37,25 @@ public class MessageView {
     }
 
     private static void editMessages(String id) {
+        List<Message> myMessages = messageService.getMyMessages(currentUser.getId(), id, MessageTye.PERSONAL);
+        for (int i = 0; i < myMessages.size(); i++) {
+            Message message = myMessages.get(i);
+            String name = "\u001B[32m"+userService.get(message.getSenderId()).getFullName()+"\u001B[0m";
+            String time = message.getLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+            System.out.printf("""
+                    %s
+                    %d.%s
+                    %s%n
+                    """.formatted(name,(i+1),message.getMessage(),time));
+        }
+        int i = ScanUtil.scanInt("Choose messase: ")-1;
+        Message message = myMessages.get(i);
+        message.setMessage(ScanUtil.scanString("Enter new message: "));
+        messageService.update(message);
     }
 
     private static void deleteMessage(String id) {
+
     }
 
     private static void sentMessage(String id) {

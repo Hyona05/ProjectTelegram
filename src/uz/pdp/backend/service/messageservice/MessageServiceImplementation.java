@@ -63,6 +63,18 @@ public class MessageServiceImplementation implements MessageService{
         }
         return messageServiceImpl;
     }
+    @Override
+    public List<Message> getMyMessages(String senderId, String toId, MessageTye type) {
+        List<Message> userMessages = new ArrayList<>();
+        for (Message message : messages) {
+            if (Objects.equals(message.getType(), type)) {
+                if ((Objects.equals(message.getSenderId(), senderId) &&Objects.equals(message.getToID(),toId))) {
+                    userMessages.add(message);
+                }
+            }
+        }
+        return userMessages;
+    }
 
     @Override
     public List<Message> getUsermessage(String senderId, String toId, MessageTye type) {
