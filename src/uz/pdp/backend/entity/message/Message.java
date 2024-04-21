@@ -3,6 +3,8 @@ package uz.pdp.backend.entity.message;
 import uz.pdp.backend.entity.BaseModel;
 import uz.pdp.backend.enums.MessageTye;
 
+import java.time.format.DateTimeFormatter;
+
 public class Message extends BaseModel {
     private String senderId;
     private String toID;
@@ -50,6 +52,11 @@ public class Message extends BaseModel {
 
     @Override
     public String toString() {
-        return "Message [" + message + "] to " + toID;
+        String time = getLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+        return """
+                %s
+                        %s
+                """.formatted(message,time);
+
     }
 }

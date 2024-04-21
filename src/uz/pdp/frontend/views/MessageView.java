@@ -11,6 +11,7 @@ import uz.pdp.frontend.utils.MenuUtils;
 import uz.pdp.frontend.utils.ScanUtil;
 import static uz.pdp.frontend.Main.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MessageView {
@@ -18,12 +19,12 @@ public class MessageView {
     private static MessageService messageService = MessageServiceImplementation.getInstance();
     public static void profile(User user) {
         currentUser = user;
+        String id = geToId();
         while (true) {
             switch (MenuUtils.menu(MenuUtils.MESSAGE)) {
-                case 1 -> sentMessage();
-                case 2 -> showMessages();
-                case 3 -> deleteChat();
-                case 4 -> settings();
+                case 1 -> sentMessage(id);
+                case 2 -> editMessages(id);
+                case 3 -> deleteMessage(id);
                 case 0 -> {
                     currentUser = null;
                     System.out.println("Logging out");
@@ -33,27 +34,36 @@ public class MessageView {
         }
     }
 
-    private static void settings() {
-
+    private static void editMessages(String id) {
     }
 
-    private static void deleteChat() {
-
+    private static void deleteMessage(String id) {
     }
 
-    private static void showMessages() {
-
+    private static void sentMessage(String id) {
+        showMessage(id);
+        String s = ScanUtil.scanString("Enter massage: ");
+                messageService.create(new Message(currentUser.getId(), id, MessageTye.PERSONAL, s));
     }
-
-    private static void sentMessage() {
+    public static String geToId(){
         String name = ScanUtil.scanString("Enter name:");
         List<User> users = userService.getUserByName(name);
         for (int i = 0; i < users.size(); i++) {
             System.out.println(i+1+" "+users.get(i).getUserName());
         }
         int i = ScanUtil.scanInt("Choose user: ")-1;
-        String id = users.get(i).getId();
-        String s = ScanUtil.scanString("Enter massage: ");
-                messageService.create(new Message(currentUser.getId(), id, MessageTye.PERSONAL, s));
+        return users.get(i).getId();
+    }
+    public static void showMessage(String id) {
+        List<Message> messages = messageService.getUsermessage(currentUser.getId(),id,MessageTye.PERSONAL);
+        for (Message message : messages) {
+            String name = "\u001B[32m"+userService.get(message.getSenderId()).getFirstName()+"\u001B[0m";
+            String time = message.getLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+            System.out.printf("""
+                    %s
+                    %s
+                    %s%n
+                    """.formatted(name,message.getMessage(),time));
+        }
     }
 }

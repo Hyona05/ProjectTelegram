@@ -1,6 +1,7 @@
 package uz.pdp.backend.service.messageservice;
 
 import uz.pdp.backend.entity.message.Message;
+import uz.pdp.backend.enums.MessageTye;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,5 +62,19 @@ public class MessageServiceImplementation implements MessageService{
             messageServiceImpl = new MessageServiceImplementation();
         }
         return messageServiceImpl;
+    }
+
+    @Override
+    public List<Message> getUsermessage(String senderId, String toId, MessageTye type) {
+        List<Message> userMessages = new ArrayList<>();
+        for (Message message : messages) {
+            if (Objects.equals(message.getType(), type)) {
+                if ((Objects.equals(message.getSenderId(), senderId) &&Objects.equals(message.getToID(),toId))
+                || (Objects.equals(message.getToID(), senderId) && Objects.equals(message.getSenderId(),toId))) {
+                    userMessages.add(message);
+                }
+            }
+        }
+        return userMessages;
     }
 }

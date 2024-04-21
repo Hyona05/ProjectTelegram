@@ -19,12 +19,10 @@ public class LoginView {
     }
     public static void signUp(){
         System.out.println("Enter your info");
-        String name = ScanUtil.scanString("Enter your firstname: ");
-        String surname = ScanUtil.scanString("Enter your lastname: ");
+        String name = ScanUtil.scanString("Enter your fullName: ");
         String username = ScanUtil.scanString("Enter your username: ");
         String password =  ScanUtil.scanString("Enter the password: ");
-        Integer age =  ScanUtil.scanInt("Enter your age: ");
-        SignUpDTO signUpDTO = new SignUpDTO(name, surname, username, password, age);
+        SignUpDTO signUpDTO = new SignUpDTO(name,username, password);
         userService.signUp(signUpDTO);
         System.out.println("Sign up successful");
     }

@@ -5,45 +5,29 @@ import uz.pdp.backend.enums.UserStatus;
 
 public class User extends BaseModel {
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String userName;
     private String password;
-    private Integer age;
-    private String phoneNumber;
     private UserStatus status;
 
-    public User(String firstName, String lastName, String userName, String password, Integer age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String fullName, String userName, String password) {
+        this.fullName = fullName;
         this.userName = userName;
         this.password = password;
-        this.age = age;
     }
-    public User(String firstName, String lastName, String userName, String password, Integer age, String phoneNumber, UserStatus status) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String fullName, String userName, String password, UserStatus status) {
+        this.fullName = fullName;
         this.userName = userName;
         this.password = password;
-        this.age = age;
-        this.phoneNumber = phoneNumber;
         this.status = status;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getUserName() {
@@ -60,22 +44,6 @@ public class User extends BaseModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public UserStatus getStatus() {

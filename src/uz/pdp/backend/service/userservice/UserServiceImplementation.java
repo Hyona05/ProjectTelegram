@@ -3,21 +3,17 @@ package uz.pdp.backend.service.userservice;
 import uz.pdp.backend.dto.LoginDTO;
 import uz.pdp.backend.dto.SignUpDTO;
 import uz.pdp.backend.entity.user.User;
-import uz.pdp.backend.entity.userGroup.UserGroup;
-import uz.pdp.backend.enums.UserStatus;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 public class UserServiceImplementation implements UserService{
     private List<User> users;
 
     private UserServiceImplementation() {
         this.users = new ArrayList<>();
-        this.users.add(new User("Admin","Admin","admin","123",15));
+        this.users.add(new User("admin","admin","123"));
     }
 
     @Override
@@ -94,7 +90,7 @@ public class UserServiceImplementation implements UserService{
         }
 
         if(!userExists) {
-            User newUser = new User(signUpDTO.firstName(), signUpDTO.LastName(), signUpDTO.userName(), signUpDTO.password(), signUpDTO.age());
+            User newUser = new User( signUpDTO.fullName(), signUpDTO.userName(), signUpDTO.password());
             users.add(newUser);
         } else {
 
