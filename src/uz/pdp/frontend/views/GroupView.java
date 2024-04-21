@@ -71,7 +71,6 @@ public class
             System.out.println((index) + groupService.get(userGroup.getGroupId()).getGroupName());
         }
 
-
     }
 
     private static void sendMessage() {
