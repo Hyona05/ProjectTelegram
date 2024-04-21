@@ -57,7 +57,7 @@ public class MessageView {
     public static void showMessage(String id) {
         List<Message> messages = messageService.getUsermessage(currentUser.getId(),id,MessageTye.PERSONAL);
         for (Message message : messages) {
-            String name = "\u001B[32m"+userService.get(message.getSenderId()).getFirstName()+"\u001B[0m";
+            String name = "\u001B[32m"+userService.get(message.getSenderId()).getFullName()+"\u001B[0m";
             String time = message.getLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm"));
             System.out.printf("""
                     %s
