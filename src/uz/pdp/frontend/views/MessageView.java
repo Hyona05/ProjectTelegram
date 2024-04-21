@@ -9,16 +9,16 @@ import uz.pdp.backend.service.userservice.UserService;
 import uz.pdp.backend.service.userservice.UserServiceImplementation;
 import uz.pdp.frontend.utils.MenuUtils;
 import uz.pdp.frontend.utils.ScanUtil;
+
 import static uz.pdp.frontend.Main.*;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MessageView {
     private static UserService userService = UserServiceImplementation.getInstance();
     private static MessageService messageService = MessageServiceImplementation.getInstance();
+
     public static void profile(User user) {
         currentUser = user;
         String id = geToId();
@@ -37,6 +37,15 @@ public class MessageView {
     }
 
     private static void editMessages(String id) {
+        List<Message> myMessages = getMessages(id);
+        int i = ScanUtil.scanInt("Choose messase: ")-1;
+        Message message = myMessages.get(i);
+        message.setMessage(ScanUtil.scanString("Enter new message: "));
+        messageService.update(message);
+
+    }
+
+    private static List<Message> getMessages(String id) {
         List<Message> myMessages = messageService.getMyMessages(currentUser.getId(), id, MessageTye.PERSONAL);
         for (int i = 0; i < myMessages.size(); i++) {
             Message message = myMessages.get(i);
@@ -48,28 +57,28 @@ public class MessageView {
                     %s%n
                     """.formatted(name,(i+1),message.getMessage(),time));
         }
-        int i = ScanUtil.scanInt("Choose messase: ")-1;
-        Message message = myMessages.get(i);
-        message.setMessage(ScanUtil.scanString("Enter new message: "));
-        messageService.update(message);
+        return myMessages;
     }
 
     private static void deleteMessage(String id) {
-
+        List<Message> myMessages = getMessages(id);
+        int i = ScanUtil.scanInt("Choose messase: ")-1;
+        String id1 = myMessages.get(i).getId();
+        messageService.delete(id1);
     }
 
     private static void sentMessage(String id) {
         showMessage(id);
         String s = ScanUtil.scanString("Enter massage: ");
-                messageService.create(new Message(currentUser.getId(), id, MessageTye.PERSONAL, s));
+        messageService.create(new Message(currentUser.getId(), id, MessageTye.PERSONAL, s));
     }
     public static String geToId(){
         String name = ScanUtil.scanString("Enter name:");
         List<User> users = userService.getUserByName(name);
         for (int i = 0; i < users.size(); i++) {
-            System.out.println(i+1+" "+users.get(i).getUserName());
+            System.out.println(i + 1 + " " + users.get(i).getUserName());
         }
-        int i = ScanUtil.scanInt("Choose user: ")-1;
+        int i = ScanUtil.scanInt("Choose user: ") - 1;
         return users.get(i).getId();
     }
     public static void showMessage(String id) {
