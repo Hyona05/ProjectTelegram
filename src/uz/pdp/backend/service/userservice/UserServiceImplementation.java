@@ -99,6 +99,13 @@ public class UserServiceImplementation implements UserService{
             throw new IllegalArgumentException("Username already exists");
         }
     }
+    public User getUserById(String userId){
+        for (User user : users) {
+            if(user.getId().equals(userId)){
+               return user;
+            }
+        }return null;
+    }
 
 
     private static UserServiceImplementation userServiceImpl;
