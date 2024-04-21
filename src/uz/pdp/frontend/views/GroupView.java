@@ -1,8 +1,10 @@
 package uz.pdp.frontend.views;
 
 import uz.pdp.backend.entity.group.Group;
+import uz.pdp.backend.entity.message.Message;
 import uz.pdp.backend.entity.user.User;
 import uz.pdp.backend.entity.userGroup.UserGroup;
+import uz.pdp.backend.enums.MessageTye;
 import uz.pdp.backend.service.groupservice.GroupService;
 import uz.pdp.backend.service.groupservice.GroupServiceImplementation;
 import uz.pdp.backend.service.messageservice.MessageServiceImplementation;
@@ -59,17 +61,23 @@ public class
 
 
     private static void showMyGroup(){
+        int index = 1;
         for (Group group : groupService.getList()) {
             for (UserGroup userGroup : userGroupService.getList()) {
                 if (group.getId().equals(userGroup.getGroupId())) {
-                    System.out.println(group.getGroupName());
+                    System.out.println(index + "." + group.getGroupName());
                 }
             }
         }
     }
 
     private static void sendMessage() {
-        String message = ScanUtil.scanString("Enter message ");
+        showMyGroup();
+        int i = ScanUtil.scanInt("Choose a group: ") - 1;
+        String s = ScanUtil.scanString("Enter the message: ");
+        messageService.create(new Message(currentUser.getId(), groupService.getList().get(i).getId(), MessageTye.GROUP,s));
+        System.out.println("Message added");
+
     }
 
     private static void addUser() {

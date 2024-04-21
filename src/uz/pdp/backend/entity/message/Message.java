@@ -6,14 +6,12 @@ import uz.pdp.backend.enums.MessageTye;
 public class Message extends BaseModel {
     private String senderId;
     private String toID;
-    private String channelID;
     private MessageTye type;
     private String message;
 
-    public Message(String senderId, String toID, String channelID, MessageTye type, String message) {
+    public Message(String senderId, String toID, MessageTye type, String message) {
         this.senderId = senderId;
         this.toID = toID;
-        this.channelID = channelID;
         this.type = type;
         this.message = message;
     }
@@ -32,14 +30,6 @@ public class Message extends BaseModel {
 
     public void setToID(String toID) {
         this.toID = toID;
-    }
-
-    public String getChannelID() {
-        return channelID;
-    }
-
-    public void setChannelID(String channelID) {
-        this.channelID = channelID;
     }
 
     public MessageTye getType() {
