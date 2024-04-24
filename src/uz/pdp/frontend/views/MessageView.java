@@ -27,6 +27,7 @@ public class MessageView {
                 case 1 -> sentMessage(id);
                 case 2 -> editMessages(id);
                 case 3 -> deleteMessage(id);
+                case 4 -> showMessage(id);
                 case 0 -> {
                     currentUser = null;
                     System.out.println("Logging out");
